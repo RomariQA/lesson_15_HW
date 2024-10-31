@@ -7,7 +7,6 @@ import static org.hamcrest.Matchers.*;
 
 public class ApiTests {
 
-    @DisplayName("")
     @Test
     void singleUserInfoTest(){
         given()
