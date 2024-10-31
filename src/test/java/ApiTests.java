@@ -1,3 +1,4 @@
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.given;
@@ -6,6 +7,7 @@ import static org.hamcrest.Matchers.*;
 
 public class ApiTests {
 
+    @DisplayName("")
     @Test
     void singleUserInfoTest(){
         given()
