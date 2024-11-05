@@ -3,6 +3,7 @@ package tests;
 import models.CreateAndUpdateUserRequestModel;
 import models.UpdateUserResponseModel;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import static io.qameta.allure.Allure.step;
@@ -11,6 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static specs.UserUpdateSpec.userUpdateRequestSpec;
 import static specs.UserUpdateSpec.userUpdateResponseSpec;
 
+@Tag("REGRESS")
 @DisplayName("Редактирование пользователя")
 public class UserUpdateTests extends TestBase {
 
