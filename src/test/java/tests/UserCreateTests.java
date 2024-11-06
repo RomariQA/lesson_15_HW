@@ -9,8 +9,7 @@ import org.junit.jupiter.api.Test;
 import static io.qameta.allure.Allure.step;
 import static io.restassured.RestAssured.given;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static specs.LogSpec.RequestSpec;
-import static specs.LogSpec.ResponseSpec;
+import static specs.LogSpec.*;
 
 
 @Tag("REGRESS")
@@ -33,8 +32,7 @@ public class UserCreateTests extends TestBase {
                     .post("/users")
 
                 .then()
-                    .spec(ResponseSpec)
-                    .statusCode(201)
+                    .spec(ResponseSpec201)
                     .extract().as(CreateSuccessfulUserResponseModel.class));
 
         step("Пользоваетль успешно создан, имя и должнотсь соответствует вводу", () -> {
@@ -58,8 +56,7 @@ public class UserCreateTests extends TestBase {
                     .post("/users")
 
                 .then()
-                .spec(ResponseSpec)
-                .statusCode(400)
+                .spec(ResponseSpec400)
                 .extract().as(CreateSuccessfulUserResponseModel.class));
 
         step("Пользователь не создан, ошибка соовтетствует докуемнтации", () ->

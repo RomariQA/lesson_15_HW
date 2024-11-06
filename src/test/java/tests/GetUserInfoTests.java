@@ -23,8 +23,7 @@ public class GetUserInfoTests extends TestBase{
                 .get("/users/2")
 
                 .then()
-                .spec(ResponseSpec)
-                .statusCode(200)
+                .spec(ResponseSpec200)
                 .extract().as(UserInfoResponseRootModel.class));
 
         step("Пользоваетль успешно создан, имя и должнотсь соответствует вводу", () -> {
@@ -43,7 +42,6 @@ public class GetUserInfoTests extends TestBase{
                 .get("/users/22")
 
                 .then()
-                .spec(ResponseSpec)
-                .statusCode(404));
+                .spec(ResponseSpec404));
     }
 }

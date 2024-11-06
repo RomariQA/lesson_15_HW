@@ -10,7 +10,7 @@ import static io.qameta.allure.Allure.step;
 import static io.restassured.RestAssured.given;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static specs.LogSpec.RequestSpec;
-import static specs.LogSpec.ResponseSpec;
+import static specs.LogSpec.ResponseSpec200;
 
 
 @Tag("REGRESS")
@@ -33,8 +33,7 @@ public class UserUpdateTests extends TestBase {
                     .put("/users/2")
 
                 .then()
-                    .spec(ResponseSpec)
-                    .statusCode(200)
+                    .spec(ResponseSpec200)
                     .extract().as(UpdateUserResponseModel.class));
 
         step("Изменения пользователя соответствуют вводу", () ->
