@@ -44,6 +44,6 @@ public class GetUserInfoTests extends TestBase{
 
                 .then()
                 .spec(ResponseSpec)
-                .statusCode(400));
+                .statusCode(404));
     }
 }
