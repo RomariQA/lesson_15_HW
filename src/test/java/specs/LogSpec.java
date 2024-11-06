@@ -16,7 +16,6 @@ public class LogSpec {
             .contentType(JSON)
             .log().all();
 
-
     public static ResponseSpecification ResponseSpec200 = new ResponseSpecBuilder()
             .expectStatusCode(200)
             .log(ALL)
@@ -31,6 +30,7 @@ public class LogSpec {
             .expectStatusCode(400)
             .log(ALL)
             .build();
+
     public static ResponseSpecification ResponseSpec404 = new ResponseSpecBuilder()
             .expectStatusCode(404)
             .log(ALL)
