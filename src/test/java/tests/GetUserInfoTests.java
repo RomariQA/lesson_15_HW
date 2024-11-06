@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 import static io.qameta.allure.Allure.step;
 import static io.restassured.RestAssured.given;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static specs.GetUserInfoSpec.*;
+import static specs.LogSpec.*;
 
 @Tag("REGRESS")
 @DisplayName("Получение информации по пользователю")
@@ -19,11 +19,12 @@ public class GetUserInfoTests extends TestBase{
     void singleUserInfoTest(){
 
         UserInfoResponseRootModel response = step("Отправляем запрос на существующего пользователя", () ->
-        given(UserInfoSuccessfulRequestSpec)
-                .get()
+        given(RequestSpec)
+                .get("/users/2")
 
                 .then()
-                .spec(getSuccessfulInfoResponseSpec)
+                .spec(ResponseSpec)
+                .statusCode(200)
                 .extract().as(UserInfoResponseRootModel.class));
 
         step("Пользоваетль успешно создан, имя и должнотсь соответствует вводу", () -> {
@@ -38,11 +39,11 @@ public class GetUserInfoTests extends TestBase{
     void singleUserNotFoundTest(){
 
         step("Отправляем запрос на несуществующего пользователя", () ->
-        given(UserInfoUnSuccessfulRequestSpec)
-                .get()
+        given(RequestSpec)
+                .get("/users/22")
 
                 .then()
-                .spec(getUnSuccessfulInfoResponseSpec)
-                .extract());
+                .spec(ResponseSpec)
+                .statusCode(400));
     }
 }

@@ -9,8 +9,9 @@ import org.junit.jupiter.api.Test;
 import static io.qameta.allure.Allure.step;
 import static io.restassured.RestAssured.given;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static specs.UserUpdateSpec.userUpdateRequestSpec;
-import static specs.UserUpdateSpec.userUpdateResponseSpec;
+import static specs.LogSpec.RequestSpec;
+import static specs.LogSpec.ResponseSpec;
+
 
 @Tag("REGRESS")
 @DisplayName("Редактирование пользователя")
@@ -25,14 +26,15 @@ public class UserUpdateTests extends TestBase {
         request.setName("morpheus");
 
         UpdateUserResponseModel response = step("Отправляем запрос на изменения пользователя", () ->
-            given(userUpdateRequestSpec)
+            given(RequestSpec)
                 .body(request)
 
                 .when()
-                    .put()
+                    .put("/users/2")
 
                 .then()
-                    .spec(userUpdateResponseSpec)
+                    .spec(ResponseSpec)
+                    .statusCode(200)
                     .extract().as(UpdateUserResponseModel.class));
 
         step("Изменения пользователя соответствуют вводу", () ->

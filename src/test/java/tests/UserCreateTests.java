@@ -9,7 +9,9 @@ import org.junit.jupiter.api.Test;
 import static io.qameta.allure.Allure.step;
 import static io.restassured.RestAssured.given;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static specs.UserCreateSpec.*;
+import static specs.LogSpec.RequestSpec;
+import static specs.LogSpec.ResponseSpec;
+
 
 @Tag("REGRESS")
 @DisplayName("Создание пользователя")
@@ -24,14 +26,15 @@ public class UserCreateTests extends TestBase {
         request.setName("morpheus");
 
         CreateSuccessfulUserResponseModel response = step("Отправляем запрос на успешное создание пользователя", () ->
-        given(userCreateRequestSpec)
+        given(RequestSpec)
                 .body(request)
 
                 .when()
-                    .post()
+                    .post("/users")
 
                 .then()
-                    .spec(userSuccessfulCreateResponseSpec)
+                    .spec(ResponseSpec)
+                    .statusCode(201)
                     .extract().as(CreateSuccessfulUserResponseModel.class));
 
         step("Пользоваетль успешно создан, имя и должнотсь соответствует вводу", () -> {
@@ -48,14 +51,15 @@ public class UserCreateTests extends TestBase {
         request.setJob("morpheus");
 
         CreateSuccessfulUserResponseModel response = step("Отправляем запрос без обязательного поля должности", () ->
-        given(userCreateRequestSpec)
+        given(RequestSpec)
                 .body(request)
 
                 .when()
-                    .post()
+                    .post("/users")
 
                 .then()
-                .spec(userUnSuccessfulCreateResponseSpec)
+                .spec(ResponseSpec)
+                .statusCode(400)
                 .extract().as(CreateSuccessfulUserResponseModel.class));
 
         step("Пользователь не создан, ошибка соовтетствует докуемнтации", () ->
